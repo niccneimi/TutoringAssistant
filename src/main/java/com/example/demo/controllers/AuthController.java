@@ -1,6 +1,10 @@
 package com.example.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
+=======
+import org.springframework.security.core.Authentication;
+>>>>>>> master
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +21,26 @@ public class AuthController {
     private UserService userService;
 
     @GetMapping("/login")
+<<<<<<< HEAD
     public String login() {
+=======
+    public String login(Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            return "redirect:/products";
+        }
+>>>>>>> master
         return "login";
     }
 
     @GetMapping("/register")
+<<<<<<< HEAD
     public String register(Model model) {
+=======
+    public String register(Authentication authentication, Model model) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            return "redirect:/products";
+        }
+>>>>>>> master
         model.addAttribute("user", new User());
         return "register";
     }
@@ -35,10 +53,14 @@ public class AuthController {
         } catch (RuntimeException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "register";
+<<<<<<< HEAD
         }
 
 
        
+=======
+        }       
+>>>>>>> master
     }
 
     @GetMapping("/")
