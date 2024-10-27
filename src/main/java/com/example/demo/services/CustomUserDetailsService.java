@@ -13,19 +13,19 @@ import com.example.demo.repositories.UserRepository;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;  // Assumes you have a UserRepository
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);  // Assumes your User entity has a findByUsername method
+        User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("Пользователь не найден");
         }
 
-        // Convert User entity to Spring Security's UserDetails object
         return org.springframework.security.core.userdetails.User
             .withUsername(user.getUsername())
-            .password(user.getPassword())  // The password should be already encrypted in the database
+            .password(user.getPassword())
+            .roles(user.getRole().name())
             .build();
     }
 }

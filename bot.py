@@ -18,7 +18,7 @@ async def start(message: Message) -> None:
     await message.reply("Hello!\nI'm Tutoring Bot!", reply_markup=ReplyKeyboardMarkup(
         keyboard=[
             [
-                KeyboardButton(text="Open Web App", web_app=WebAppInfo(url="https://tb-channel-ref-horhi.amvera.io/referral/1234"))
+                KeyboardButton(text="Open Web App", web_app=WebAppInfo(url="https://tutorasnew-niccneimi.amvera.io/products"))
             ]
         ],
         resize_keyboard=True

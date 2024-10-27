@@ -14,13 +14,13 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder; 
+    private PasswordEncoder passwordEncoder;
 
     public void registerUser(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
             throw new RuntimeException("Пользователь с данным именем уже существует!");
         }
-        if  (userRepository.existsByEmail(user.getEmail())) {
+        if (userRepository.existsByEmail(user.getEmail())) {
             throw new RuntimeException("Пользователь с данной почтой уже существует!");
         }
         if (!user.getPassword().equals(user.getConfirmPassword())) {
@@ -29,6 +29,11 @@ public class UserService {
         
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setConfirmPassword(null);
+
+        if (user.getRole() == null) {
+            throw new RuntimeException("Роль должна быть выбрана!");
+        }
+        
         userRepository.save(user);
     }
 }

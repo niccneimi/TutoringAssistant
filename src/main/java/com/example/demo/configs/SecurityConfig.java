@@ -16,6 +16,9 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/register", "/login").anonymous()
                 .requestMatchers("/products", "/products/image/*", "/").permitAll()
+                .requestMatchers("/teacher/**").hasRole("TEACHER")
+                .requestMatchers("/student/**").hasRole("STUDENT")
+                .requestMatchers("/parent/**").hasRole("PARENT")
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
